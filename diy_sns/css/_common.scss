@@ -1,0 +1,88 @@
+@use 'variable' as v;
+
+/* ---------------------------
+  header
+----------------------------- */
+.header {
+  background-color: #f2f2f2;
+}
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 64px;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+  @include v.mq(v.$sp-wide) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+.header__logo {
+  a {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    @include v.hoverOpacity;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.g-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.g-nav__item {
+  a {
+    display: block;
+    padding: 1em;
+  }
+}
+
+/* ---------------------------
+  footer
+----------------------------- */
+.footer__copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 10px;
+  text-align: center;
+  background-color: #f2f2f2;
+}
+.f-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+.f-nav-list {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  height: 48px;
+}
+.f-nav-list__item {
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 4px 16px;
+  }
+}
+
+
+main {
+  display: block;
+  padding-bottom: 48px;
+}

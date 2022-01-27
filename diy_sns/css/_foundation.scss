@@ -1,0 +1,56 @@
+@use 'variable' as v;
+
+/* ---------------------------
+  base
+----------------------------- */
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+body {
+  height: 100%;
+  color: var(--fontMainColor);
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: var(--mainFont);
+  font-weight: 400;
+  font-feature-settings: "palt";
+  letter-spacing: 0.025em;
+  overflow-x: hidden;
+}
+body > footer {
+  position: sticky;
+  top: 100vh;
+}
+a {
+  color: var(--fontMainColor);
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+/* ---------------------------
+  utility
+----------------------------- */
+.wrapper {
+  margin: 0 auto;
+  max-width: 1024px;
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  @include v.mq(v.$sp) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

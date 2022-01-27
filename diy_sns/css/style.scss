@@ -1,0 +1,83 @@
+@use 'reset';
+@use 'foundation';
+@use 'component';
+@use 'common';
+@use 'top';
+@use 'login-register';
+@use 'variable' as v;
+
+h1:not([class]) {
+  margin-bottom: 1em;
+  font-size: 24px;
+}
+h2:not([class]) {
+  margin-bottom: 0.5em;
+  font-size: 20px;
+}
+h3:not([class]) {
+  margin-bottom: 0.5em;
+  font-size: 18px;
+}
+time {
+  font-size: 12px;
+  text-decoration: none;
+}
+.section {
+  padding: 64px 0;
+  @include v.mq(v.$sp-wide) {
+    padding: 32px 0;
+  }
+}
+
+
+.p-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -32px;
+  margin-bottom: -32px;
+}
+.p-list__item {
+  width: 50%;
+  padding-left: 32px;
+  margin-bottom: 32px;
+  @include v.mq(v.$tab) {
+    width: 100%;
+  }
+}
+.p-list__item__link {
+  display: block;
+  text-decoration: none;
+}
+.p-list-thumb {
+  display: flex;
+}
+.p-list-thumb__item {
+  width: 50%;
+  img {
+    object-fit: cover;
+  }
+}
+.p-list-text {
+  background-color: var(--bgMainColor);
+  padding: 16px;
+  @include v.mq(v.$sp-wide) {
+    padding: 12px;
+  }
+}
+.p-list-text__title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.p-list-meta {
+  display: flex;
+  align-items: center;
+}
+
+
+.post-pagination {
+  margin-top: 32px;
+}
+.post-sort {
+  margin-bottom: 32px;
+}
