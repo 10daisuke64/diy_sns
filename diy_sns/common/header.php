@@ -15,7 +15,7 @@
 
 <body>
   <!-- header -->
-  <header class="header">
+  <header class="header" id="js-header">
     <div class="header-wrapper">
       <h1 class="header__logo">
         <?php
@@ -40,7 +40,9 @@
             </li>
           <?php else : ?>
             <li class="g-nav__item">
-              <a href="/diy_sns/user/dashboard/">マイページ</a>
+              <a class="g-nav__item__mypage" href="/diy_sns/user/dashboard/">
+                <span><?= output_image_profile($_SESSION['image_profile']); ?></span>
+              </a>
             </li>
           <?php endif; ?>
         </ul>

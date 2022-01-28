@@ -30,6 +30,7 @@ if (password_verify($password, $val['password'])) {
   $_SESSION['session_id'] = session_id();
   $_SESSION['user_id'] = $val['id'];
   $_SESSION['name'] = $val['name'];
+  $_SESSION['image_profile'] = $val['image_profile'];
   $_SESSION['is_admin'] = $val['is_admin'];
   header("Location:/diy_sns/home/");
   exit();

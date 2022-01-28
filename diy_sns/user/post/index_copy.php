@@ -35,81 +35,27 @@ foreach ($result as $val) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" integrity="sha256-jKV9n9bkk/CTP8zbtEtnKaKf+ehRovOYeKoyfthwbC8=" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js" integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
-<style>
-  .modal {
-    display: none;
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
+<style type="text/css">
+  .preview {
+    overflow: hidden;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
+    border: 1px solid red;
   }
 
-  .modal>.wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal__content {
-    background: #f2f2f2;
-    width: 100%;
-  }
-
-  .cropper-container {
-    width: 100%;
-  }
-
-  .modal__save {
-    display: block;
-    margin: 16px auto;
-    padding: 16px 20px;
-    width: 100%;
-    max-width: 240px;
-    text-align: center;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 700;
-    background-color: red;
-  }
-
-  .modal__cancel {
-    display: block;
-    margin: 16px auto;
-    padding: 16px 20px;
-    width: 100%;
-    max-width: 240px;
-    text-align: center;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 700;
-    background-color: #444444;
+  .modal-lg {
+    max-width: 1000px !important;
   }
 </style>
+
 
 <main>
   <section class="section">
     <div class="wrapper">
       <h1>投稿フォーム</h1>
       <div class="post-form">
-
-        <div id="js-thumbnail"></div>
-        <input type="file" name="image" id="js-input-image">
-
-        <div id="js-modal" class="modal">
-          <div class="wrapper">
-            <div class="modal__content">
-              <img id="js-modal__image" src="">
-              <button class="modal__save" id="js-modal__save">保存</button>
-              <button class="modal__cancel" id="js-modal__cancel">キャンセル</button>
-            </div>
-          </div>
-        </div>
-
-        <form action="./post.php" method="POST" enctype="multipart/form-data">
+        <!-- <form action="./post.php" method="POST" enctype="multipart/form-data">
           <dl>
             <dt>Before</dt>
             <dd><input type="file" name="image_before" accept="image/*" capture="camera"></dd>
@@ -131,13 +77,48 @@ foreach ($result as $val) {
             <dd><textarea name="body" rows="10"></textarea></dd>
           </dl>
           <button class="c-submit" type="submit">投稿する</button>
-        </form>
+        </form> -->
 
+        <!-- ここから -->
 
+        <div class="container">
+          <form action="./sample.php" method="POST" enctype="multipart/form-data">
+            <div id="thumbnail"></div>
+            <input type="file" name="image" class="image">
+            <button type="submit">送信</button>
+          </form>
+        </div>
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="img-container">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <img id="image" src="/diy_sns/img/no_icon.svg">
+                    </div>
+                    <div class="col-md-4">
+                      <div class="preview"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                <button type="button" class="btn btn-primary" id="crop">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <script>
-          // base64 -> file
           function _convertToFile(imgData, file) {
+            // ここでバイナリにしている
             const blob = atob(imgData.replace(/^.*,/, ''));
             let buffer = new Uint8Array(blob.length);
             for (let i = 0; i < blob.length; i++) {
@@ -148,26 +129,16 @@ foreach ($result as $val) {
             });
           }
 
-          var $modal = $('#js-modal');
-          var image = document.getElementById('js-modal__image');
+
+          var $modal = $('#modal');
+          var image = document.getElementById('image');
           var cropper;
 
-          $("#js-input-image").on("change", function(e) {
+          $("body").on("change", ".image", function(e) {
             var files = e.target.files;
             var done = function(url) {
               image.src = url;
-              $modal.fadeIn(200, function() {
-                cropper = new Cropper(image, {
-                  aspectRatio: 1,
-                  viewMode: 3,
-                  minContainerWidth: 300,
-                  minContainerHeight: 300,
-                  minCanvasWidth: 300,
-                  minCanvasHeight: 300,
-                  minCropBoxWidth: 300,
-                  minCropBoxHeight: 300
-                });
-              });
+              $modal.modal('show');
             };
             var reader;
             var file;
@@ -185,20 +156,20 @@ foreach ($result as $val) {
               }
             }
           });
-
-          // modal -> cancel
-          $("#js-modal__cancel").on("click", function() {
-            $modal.fadeOut();
+          $modal.on('shown.bs.modal', function() {
+            cropper = new Cropper(image, {
+              aspectRatio: 1,
+              viewMode: 3,
+              preview: '.preview'
+            });
+          }).on('hidden.bs.modal', function() {
             cropper.destroy();
             cropper = null;
-            $("#js-input-image").val("");
-          })
-
-          // modal -> save
-          $("#js-modal__save").click(function() {
+          });
+          $("#crop").click(function() {
             canvas = cropper.getCroppedCanvas({
-              width: 300,
-              height: 300,
+              width: 160,
+              height: 160,
             });
             canvas.toBlob(function(blob) {
               url = URL.createObjectURL(blob);
@@ -211,7 +182,8 @@ foreach ($result as $val) {
                 const fd = new FormData();
                 fd.append('image', imgFile);
 
-                // POST
+                console.log(fd.get('image'));
+
                 $.ajax({
                   type: "POST",
                   dataType: "html",
@@ -221,11 +193,10 @@ foreach ($result as $val) {
                   contentType: false,
                   processData: false
                 }).done(function(response) {
-                  $modal.fadeOut();
-                  let thumbnail = `
-                    <img src="/diy_sns${response}">
-                  `;
-                  $("#js-thumbnail").html(thumbnail);
+                  $modal.modal('hide');
+                  // console.log(response);
+                  $("#thumbnail").html(response);
+
                 }).fail(function(response) {
                   alert("エラー");
                 });
@@ -235,6 +206,7 @@ foreach ($result as $val) {
         </script>
 
 
+        <!-- ここまで -->
       </div>
     </div>
   </section>

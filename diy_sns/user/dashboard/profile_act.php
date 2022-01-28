@@ -25,7 +25,7 @@ $pdo = connect_to_db();
 
 if (isset($_FILES["image_profile"]) && $_FILES["image_profile"]['error'] == 0) {
   // 画像の変更あり
-  $image_profile = post_file("image_profile", 10000);
+  $image_profile = post_file("image_profile", 1000000);
 
   $sql = "UPDATE users_table SET name=:name, image_profile=:image_profile, description=:description, updated_at=now() WHERE id=:user_id";
   $stmt = $pdo->prepare($sql);
@@ -33,6 +33,14 @@ if (isset($_FILES["image_profile"]) && $_FILES["image_profile"]['error'] == 0) {
   $stmt->bindValue(':name', $name, PDO::PARAM_STR);
   $stmt->bindValue(':image_profile', $image_profile, PDO::PARAM_STR);
   $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+  try {
+    $status = $stmt->execute();
+  } catch (PDOException $e) {
+    echo json_encode(["sql error" => "{$e->getMessage()}"]);
+    exit();
+  }
+  $_SESSION['name'] = $name;
+  $_SESSION['image_profile'] = $image_profile;
 } else {
   // 画像の変更なし
   $sql = "UPDATE users_table SET name=:name, description=:description, updated_at=now() WHERE id=:user_id";
@@ -40,13 +48,12 @@ if (isset($_FILES["image_profile"]) && $_FILES["image_profile"]['error'] == 0) {
   $stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
   $stmt->bindValue(':name', $name, PDO::PARAM_STR);
   $stmt->bindValue(':description', $description, PDO::PARAM_STR);
-}
-
-try {
-  $status = $stmt->execute();
-} catch (PDOException $e) {
-  echo json_encode(["sql error" => "{$e->getMessage()}"]);
-  exit();
+  try {
+    $status = $stmt->execute();
+  } catch (PDOException $e) {
+    echo json_encode(["sql error" => "{$e->getMessage()}"]);
+    exit();
+  }
 }
 
 header("Location:/diy_sns/user/dashboard/");

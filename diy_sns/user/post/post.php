@@ -23,8 +23,8 @@ $user_id = $_SESSION['user_id'];
 // -----------------------------
 //  FILE 受け取り
 // -----------------------------
-$image_before = post_file("image_before", 10000);
-$image_after = post_file("image_after", 10000);
+$image_before = post_file("image_before", 1000000);
+$image_after = post_file("image_after", 1000000);
 // var_dump($image_before);
 // var_dump($image_after);
 // exit();

@@ -39,11 +39,10 @@ if (!$result) {
     <div class="wrapper">
       <h1>トップページ</h1>
       <p>このサイトはリフォーム事例のBeforeAfterを投稿できるSNSです。</p>
-      <p><a href="/diy_sns/register/">ユーザー登録する</a></p>
+      <p><a href="/diy_sns/register/">ユーザー登録して使ってみる</a></p>
       <section class="section">
         <h2>みんなの投稿</h2>
         <?= $output_post; ?>
-        <a href="/diy_sns/home/">投稿をもっとみる</a>
       </section>
     </div>
   </section>

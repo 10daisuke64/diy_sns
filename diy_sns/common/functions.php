@@ -80,6 +80,22 @@ function output_category($data)
   return $category_list;
 }
 
+// プロフィール画像の条件分岐
+function output_image_profile($data)
+{
+  $output_image_profile = "";
+  if ($data == NULL) {
+    $output_image_profile .= "
+      <img src='/diy_sns/img/no_icon.svg'>
+    ";
+  } else {
+    $output_image_profile .= "
+      <img src='/diy_sns{$data}'>
+    ";
+  }
+  return $output_image_profile;
+}
+
 // 投稿リストの雛形
 function output_post_list($data)
 {
@@ -88,28 +104,34 @@ function output_post_list($data)
   foreach ($data as $record) {
     // カテゴリー
     $category_list = output_category($record["category"]);
+    // プロフィール画像
+    $image_profile = output_image_profile($record["image_profile"]);
 
     $output_post_list .= "
       <li class='p-list__item'>
-        <a class='p-list__item__link' href='/diy_sns/home/single.php?post_id={$record["id"]}'>
-          <div class='p-list-thumb'>
+        <div class='p-list__item-inner'>
+          <a class='p-list-thumb' href='/diy_sns/home/single.php?post_id={$record["id"]}'>
             <div class='p-list-thumb__item'>
               <img src='/diy_sns{$record["image_before"]}' width='500' height='500'>
             </div>
             <div class='p-list-thumb__item'>
-             <img src='/diy_sns{$record["image_after"]}' width='500' height='500'>
+              <img src='/diy_sns{$record["image_after"]}' width='500' height='500'>
             </div>
-          </div>
-          <div class='p-list-meta'>
-            <div class='p-list-meta__item'>
-              <a href='#'><img src='#'></a>
-            </div>
-          </div>
-          <div class='p-list-text'>
+          </a>
+          <a class='p-list-text' href='/diy_sns/home/single.php?post_id={$record["id"]}'>
             {$category_list}
             <h3 class='p-list-text__title'>{$record["title"]}</h3>
+          </a>
+          <div class='p-list-meta'>
+            <div class='p-list-meta__prof'>
+              <a class='icon' href='#'>{$image_profile}</a>
+              <a class='name' href='#'>{$record["name"]}</a>
+            </div>
+            <div class='p-list-meta__action'>
+              <label class='c-fav'><input type='checkbox' value='fav'></label>
+            </div>
           </div>
-        </a>
+        </div>
       </li>
     ";
   }

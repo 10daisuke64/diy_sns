@@ -5,6 +5,11 @@
   </footer>
   <!-- //footer -->
 <?php else : ?>
+  <!-- footer -->
+  <footer class="footer">
+    <p class="footer__copy"><small>© 2021 Daisuke Sumida</small></p>
+  </footer>
+  <!-- //footer -->
   <!-- menu -->
   <nav class="f-nav">
     <div class="wrapper">

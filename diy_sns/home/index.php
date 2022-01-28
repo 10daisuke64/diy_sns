@@ -53,8 +53,6 @@ $output_cat_title = "";
 // GROUP BY posts_table.id
 // ORDER BY posts_table.created_at DESC
 
-
-
 // -----------------------------
 //  投稿リストの取得
 // -----------------------------
@@ -74,8 +72,6 @@ try {
   exit();
 }
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($result);
-// exit();
 
 // -----------------------------
 //  ページネーション設定

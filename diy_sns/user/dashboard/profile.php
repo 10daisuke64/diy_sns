@@ -54,7 +54,7 @@ $result = $stmt->fetch();
           <dl>
             <dt>自己紹介</dt>
             <dd>
-              <textarea name="description" value="<?= $result["description"]; ?>" maxlength="160"></textarea>
+              <textarea name="description" maxlength="160" rows="8"><?= $result["description"]; ?></textarea>
             </dd>
           </dl>
           <button class="c-submit" type="submit">保存</button>

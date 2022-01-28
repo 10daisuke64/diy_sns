@@ -11,10 +11,6 @@ $status = $_GET["status"];
 <?php include $path . "/common/header.php"; ?>
 <!-- //header -->
 
-<div class="hero">
-  <img src="/diy_sns/img/hero.png" width="160" height="160" alt="hero">
-</div>
-
 <main>
   <section class="section">
     <div class="wrapper">
@@ -45,7 +41,7 @@ $status = $_GET["status"];
           <button class="c-submit" type="submit">登録</button>
         </form>
       </div>
-      <a href="/diy_sns/login/">ログイン</a>
+      <a href="/diy_sns/login/">ログインはこちら</a>
     </div>
   </section>
 </main>
