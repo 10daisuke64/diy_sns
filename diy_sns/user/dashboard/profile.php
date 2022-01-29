@@ -30,9 +30,9 @@ $result = $stmt->fetch();
 
 <main>
   <section class="section">
-    <div class="wrapper">
+    <div class="wrapper wrapper--secondary">
       <h1>プロフィール設定</h1>
-      <div class="profile-form">
+      <div class="form">
         <form action="./profile_act.php" method="POST" enctype="multipart/form-data">
           <dl>
             <dt>プロフィール画像</dt>

@@ -13,12 +13,12 @@ $status = $_GET["status"];
 
 <main>
   <section class="section">
-    <div class="wrapper">
-      <h1>新規ユーザー登録</h1>
+    <div class="wrapper wrapper--secondary">
+      <h1>新規登録</h1>
       <?php if ($status == "already_exist") : ?>
         <p style="color:red;">このメールアドレスはすでに登録されています</p>
       <?php endif; ?>
-      <div class="login-form">
+      <div class="form">
         <form action="./register.php" method="POST">
           <dl>
             <dt>ニックネーム</dt>
@@ -41,7 +41,9 @@ $status = $_GET["status"];
           <button class="c-submit" type="submit">登録</button>
         </form>
       </div>
-      <a href="/diy_sns/login/">ログインはこちら</a>
+      <div class="form-out">
+        <a href="/diy_sns/login/">ログインはこちら</a>
+      </div>
     </div>
   </section>
 </main>

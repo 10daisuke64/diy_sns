@@ -8,9 +8,12 @@
   max-width: 200px;
   width: 100%;
   margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 16px;
   color: #ffffff;
   background-color: var(--baseColor);
+  cursor: pointer;
 }
 
 .c-label-checkbox {

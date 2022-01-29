@@ -109,3 +109,101 @@ time {
 .post-sort {
   margin-bottom: 32px;
 }
+
+
+.form {
+  dl {
+    display: flex;
+    margin-bottom: 20px;
+    @include v.mq(v.$sp-wide) {
+      display: block;
+      margin-bottom: 16px;
+    }
+  }
+  dt {
+    width: 128px;
+    padding-top: 4px;
+    padding-right: 16px;
+    font-size: 14px;
+  }
+  dd {
+    width: calc(100% - 128px);
+    @include v.mq(v.$sp-wide) {
+      width: 100%;
+      margin-top: 4px;
+    }
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    width: 100%;
+    padding: 4px 8px;
+    font-size: 16px;
+    font-family: var(--mainFont);
+    font-weight: 400;
+    border-radius: 4px;
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+    &:focus {
+      background-color: #fafafa;
+    }
+  }
+  textarea {
+    height: 200px;
+  }
+}
+.form-out {
+  margin-top: 16px;
+  text-align: center;
+  a {
+    font-size: 14px;
+    @include v.hoverUnderlineNone;
+  }
+}
+
+
+.modal {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 80px 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.modal-wrapper {
+  max-width: 640px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal__content {
+  width: 100%;
+}
+.modal__save,
+.modal__cancel {
+  display: block;
+  margin: 16px auto;
+  padding: 16px 20px;
+  width: 100%;
+  max-width: 240px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+.modal__save {
+  background-color: var(--baseColor);
+}
+.modal__cancel {
+  background-color: #444444;
+}
+.cropper-container {
+  width: 100%;
+}

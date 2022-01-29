@@ -15,19 +15,12 @@ if (
 ) {
   exit('paramError');
 }
+$image_before = $_POST["image_before"];
+$image_after = $_POST["image_after"];
 $title = $_POST["title"];
 $body = $_POST["body"];
 $category = $_POST['category'];
 $user_id = $_SESSION['user_id'];
-
-// -----------------------------
-//  FILE 受け取り
-// -----------------------------
-$image_before = post_file("image_before", 1000000);
-$image_after = post_file("image_after", 1000000);
-// var_dump($image_before);
-// var_dump($image_after);
-// exit();
 
 // -----------------------------
 //  投稿処理

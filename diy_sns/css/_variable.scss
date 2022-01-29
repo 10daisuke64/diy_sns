@@ -66,6 +66,7 @@ $sp: 480px;
   }
 }
 @mixin hoverUnderlineNone {
+  text-decoration: underline;
   transition: text-decoration .1s ease-in-out;
   @media screen and (min-width: 481px) {
     &:hover {

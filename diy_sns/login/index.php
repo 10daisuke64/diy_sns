@@ -13,12 +13,12 @@ $status = $_GET["status"];
 
 <main>
   <section class="section">
-    <div class="wrapper">
+    <div class="wrapper wrapper--secondary">
       <h1>ログイン</h1>
       <?php if ($status == "failure") : ?>
         <p style="color:red;">ログイン情報に誤りがあります</p>
       <?php endif; ?>
-      <div class="login-form">
+      <div class="form">
         <form action="./login.php" method="POST">
           <dl>
             <dt>メールアドレス</dt>
@@ -35,7 +35,9 @@ $status = $_GET["status"];
           <button class="c-submit" type="submit">ログイン</button>
         </form>
       </div>
-      <a href="/diy_sns/register/">新規登録</a>
+      <div class="form-out">
+        <a href="/diy_sns/register/">新規登録はこちら</a>
+      </div>
     </div>
   </section>
 </main>

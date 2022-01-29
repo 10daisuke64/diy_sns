@@ -53,6 +53,18 @@ $output_cat_title = "";
 // GROUP BY posts_table.id
 // ORDER BY posts_table.created_at DESC
 
+
+// SELECT
+//   result_table.*
+// FROM
+// post_category
+// LEFT OUTER JOIN ( SELECT posts_table.*, GROUP_CONCAT(categories_table.name SEPARATOR ',') AS category FROM posts_table LEFT OUTER JOIN post_category ON posts_table.id = post_category.post_id LEFT OUTER JOIN categories_table ON categories_table.id = post_category.category_id GROUP BY posts_table.id ) AS result_table
+// ON result_table.id = post_category.post_id
+// WHERE post_category.category_id=:cat_param AND result_table.is_deleted = 0
+// ORDER BY result_table.created_at DESC
+
+
+
 // -----------------------------
 //  投稿リストの取得
 // -----------------------------
@@ -60,7 +72,7 @@ if (!isset($cat_param)) {
   $sql = "SELECT posts_table.*, GROUP_CONCAT(categories_table.name SEPARATOR ',') AS category, users_table.name, users_table.image_profile FROM posts_table LEFT OUTER JOIN users_table ON posts_table.user_id = users_table.id LEFT OUTER JOIN post_category ON posts_table.id = post_category.post_id LEFT OUTER JOIN categories_table ON categories_table.id = post_category.category_id WHERE posts_table.is_deleted=0 GROUP BY posts_table.id ORDER BY posts_table.created_at DESC";
   $stmt = $pdo->prepare($sql);
 } else {
-  $sql = "SELECT result_table.* FROM post_category LEFT OUTER JOIN ( SELECT posts_table.*, GROUP_CONCAT(categories_table.name SEPARATOR ',') AS category FROM posts_table LEFT OUTER JOIN post_category ON posts_table.id = post_category.post_id LEFT OUTER JOIN categories_table ON categories_table.id = post_category.category_id GROUP BY posts_table.id ) AS result_table ON result_table.id = post_category.post_id WHERE post_category.category_id=:cat_param AND result_table.is_deleted = 0 ORDER BY result_table.created_at DESC";
+  $sql = "SELECT result_table.* FROM post_category LEFT OUTER JOIN ( SELECT posts_table.*, GROUP_CONCAT(categories_table.name SEPARATOR ',') AS category, users_table.name, users_table.image_profile FROM posts_table LEFT OUTER JOIN users_table ON posts_table.user_id = users_table.id LEFT OUTER JOIN post_category ON posts_table.id = post_category.post_id LEFT OUTER JOIN categories_table ON categories_table.id = post_category.category_id GROUP BY posts_table.id ORDER BY posts_table.created_at DESC ) AS result_table ON result_table.id = post_category.post_id WHERE post_category.category_id=:cat_param AND result_table.is_deleted = 0 ORDER BY result_table.created_at DESC";
   $stmt = $pdo->prepare($sql);
   $stmt->bindValue(':cat_param', $cat_param, PDO::PARAM_INT);
 }

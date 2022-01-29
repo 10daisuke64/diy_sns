@@ -49,6 +49,10 @@ button {
   width: 100%;
   padding-left: 40px;
   padding-right: 40px;
+
+  &--secondary {
+    max-width: 640px;
+  }
   @include v.mq(v.$sp) {
     padding-left: 16px;
     padding-right: 16px;

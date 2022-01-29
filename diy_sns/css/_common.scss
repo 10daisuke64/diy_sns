@@ -68,6 +68,13 @@
   }
 }
 
+main {
+  display: block;
+  @include v.mq(v.$sp-wide) {
+    padding-bottom: 24px;
+  }
+}
+
 /* ---------------------------
   footer
 ----------------------------- */
@@ -106,10 +113,4 @@
     height: 100%;
     padding: 4px 16px;
   }
-}
-
-
-main {
-  display: block;
-  padding-bottom: 48px;
 }
